@@ -1,7 +1,5 @@
 # payfast-sdk-php
 [![License: MIT]
-
-(https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![Travis Build Status](https://travis-ci.org/fergusdixon/payfast-sdk-php.svg?branch=master)
 ![StyleCI Status](https://styleci.io/repos/??/shield?branch=master)
 [![codecov](https://codecov.io/gh/fergusdixon/payfast-sdk-php/branch/master/graph/badge.svg)](https://codecov.io/gh/fergusdixon/payfast-sdk-php)
