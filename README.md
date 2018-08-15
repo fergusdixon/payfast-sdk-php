@@ -5,7 +5,7 @@
 [![codecov](https://codecov.io/gh/fergusdixon/payfast-sdk-php/branch/master/graph/badge.svg)](https://codecov.io/gh/fergusdixon/payfast-sdk-php)
 ![Packagist Version](https://img.shields.io/packagist/v/fergusdixon/payfast-sdk-php.svg)
 
-A PHP handler for making requests to documented [Payfast](https://www.payfast.co.za) endpoints.
+A PHP handler for making requests to documented [PayFast](https://www.payfast.co.za) endpoints.
 
 See their [docs](https://developers.payfast.co.za/documentation/)
 
@@ -36,3 +36,6 @@ Payfast requires a MD5 hash of the alphabetised submitted variables, header and 
 Payfast provides a [sandbox environment](https://sandbox.payfast.co.za/) to test integrations.
 
 Test requests are send to the normal endpoint, but append `?testing=true` to the URI.
+
+## Acknowledgements
+- Add yourself here!
