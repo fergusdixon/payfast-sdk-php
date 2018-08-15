@@ -26,5 +26,6 @@ See their [docs](https://developers.payfast.co.za/documentation/)
 Payfast requires a MD5 hash of the alphabetised submitted variables, header and body variables, as well as the passphrase to ensure the request has not been tampered with.
 
 ### Testing
-Payfast provides a [sandbox environment](https://sandbox.payfast.co.za/) to test integrations
+Payfast provides a [sandbox environment](https://sandbox.payfast.co.za/) to test integrations.
+
 Test requests are send to the normal endpoint, but append `?testing=true` to the URI.
