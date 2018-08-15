@@ -1,4 +1,5 @@
 # payfast-sdk-php
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 A PHP handler for making requests to documented [Payfast](https://www.payfast.co.za) endpoints.
 
 See their [docs](https://developers.payfast.co.za/documentation/)
