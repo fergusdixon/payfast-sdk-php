@@ -98,7 +98,7 @@ class RequestHandlerTest extends TestCase
             ),
         ]);
 
-        $response = $this->handler->request('POST', '/adhoc', $options);
+        $response = $this->handler->custom('POST', '/adhoc', $options);
         $this->assertEquals(
             $result,
             $response
@@ -127,7 +127,7 @@ class RequestHandlerTest extends TestCase
             ),
         ]);
 
-        $response = $this->handler->request('GET', '/history', $options);
+        $response = $this->handler->custom('GET', '/history', $options);
         $this->assertEquals(
             $result,
             $response

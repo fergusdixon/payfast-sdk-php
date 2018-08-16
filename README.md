@@ -28,6 +28,38 @@ See their [docs](https://developers.payfast.co.za/documentation/)
     - [ ] Unpause Subscription
     - [ ] Cancel Subscription
     
+## Usage
+This PayFast SDK requires config variables passed to it. 
+
+`merchantId` and `passPhrase` are mandatory, if not defined other fields will default to values shown below:
+
+```php
+$config = [
+    'merchantId' => 'testId',               // Required
+    'passPhrase' => 'testPhrase',           // Required
+    'endpoint' => '//api.payfast.co.za',
+    'port' => 443,
+    'ssl' => true,
+    'testing' => false,
+];
+
+$payfast = new PayFastSDK($config);
+```
+
+### Custom Requests
+You can create a request to any endpoint in PayFast using `$payfast->request->custom($verb, $method, $options)`
+
+For example, getting [Transaction History](https://developers.payfast.co.za/documentation/#transaction-history)
+```php
+$verb = 'GET';
+$method = '/history';
+$options = [
+    'from' => '2018-02-01',
+    'to' => '2018-03-04',
+];
+$response = $payfast->request->custom($verb, $method, $options)
+```
+
 ## Quirks
 
 ### Signature Generation

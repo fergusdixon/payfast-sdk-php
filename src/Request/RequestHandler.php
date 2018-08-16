@@ -111,7 +111,7 @@ class RequestHandler
      * @throws ValidationException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function request(String $verb, $method, $parameters = [])
+    public function custom(String $verb, $method, $parameters = [])
     {
         // Only GET and POST are supported by PayFast
         if ($verb !== 'GET' && $verb !== 'POST') {
