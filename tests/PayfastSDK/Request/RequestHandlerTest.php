@@ -23,7 +23,7 @@ class RequestHandlerTest extends TestCase
     private $config = [
         'merchantId' => 'testId',
         'passPhrase' => 'testPhrase',
-        'endpoint' => '//localhost:8082',
+        'endpoint' => '//localhost',
         'port' => 80,
         'ssl' => false,
         'testing' => true,
