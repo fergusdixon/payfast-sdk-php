@@ -37,13 +37,6 @@ class Config
     public $endpoint = '//api.payfast.co.za';
 
     /**
-     * The method
-     *
-     * @var string $method
-     */
-    public $method = '/ping';
-
-    /**
      * The port
      *
      * @var integer $port
@@ -124,10 +117,6 @@ class Config
             $this->endpoint = (string)$config['endpoint'];
         }
 
-        if (isset($config['method']) && !empty($config['method'])) {
-            $this->method = (string)$config['method'];
-        }
-
         if (isset($config['port']) && !empty($config['port'])) {
             $this->port = (integer)$config['port'];
         }
@@ -152,7 +141,6 @@ class Config
             'merchantId' => $this->merchantId,
             'passPhrase' => $this->passPhrase,
             'endpoint' => $this->endpoint,
-            'method' => $this->method,
             'port' => $this->port,
             'ssl' => $this->ssl,
             'testing' => $this->testing,
