@@ -1,8 +1,8 @@
 # payfast-sdk-php
 ![MIT License](https://img.shields.io/github/license/fergusdixon/payfast-sdk-php.svg)
-![Travis Build Status](https://travis-ci.org/fergusdixon/payfast-sdk-php.svg?branch=master)
-![StyleCI Status](https://styleci.io/repos/??/shield?branch=master)
-[![codecov](https://codecov.io/gh/fergusdixon/payfast-sdk-php/branch/master/graph/badge.svg)](https://codecov.io/gh/fergusdixon/payfast-sdk-php)
+![Travis Build Status](https://travis-ci.org/fergusdixon/payfast-sdk-php.svg?branch=dev)
+![StyleCI Status](https://styleci.io/repos/??/shield?branch=dev)
+[![codecov](https://codecov.io/gh/fergusdixon/payfast-sdk-php/branch/dev/graph/badge.svg)](https://codecov.io/gh/fergusdixon/payfast-sdk-php)
 ![Packagist Version](https://img.shields.io/packagist/v/fergusdixon/payfast-sdk-php.svg)
 
 A PHP handler for making requests to documented [PayFast](https://www.payfast.co.za) endpoints.
