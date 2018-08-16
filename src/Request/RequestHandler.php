@@ -197,7 +197,7 @@ class RequestHandler
             }
 
             foreach ($parameters as $key => $value) {
-                 $uri .= sprintf('%s=%s&', $key, $value);
+                $uri .= sprintf('%s=%s&', $key, $value);
             }
 
             // Trim trailing ampersand
