@@ -115,11 +115,17 @@ class RequestHandler
     {
         // Only GET and POST are supported by PayFast
         if ($verb !== 'GET' && $verb !== 'POST') {
-            throw new ValidationException(12100, sprintf('Invalid verb: %s', $verb));
+            throw new ValidationException(
+                ValidationException::INVALID_VERB_EXCEPTION,
+                sprintf('Invalid verb: %s', $verb)
+            );
         }
 
         if (is_null($method)) {
-            throw new ValidationException(12100, sprintf('Method cannot be null', $verb));
+            throw new ValidationException(
+                ValidationException::INVALID_METHOD_EXCEPTION,
+                sprintf('Method cannot be null', $verb)
+            );
         }
 
         return $this->handleRequest($verb, $method, $parameters);
