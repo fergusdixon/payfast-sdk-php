@@ -11,9 +11,9 @@ A PHP handler for making requests to documented [PayFast](https://www.payfast.co
 See their [docs](https://developers.payfast.co.za/documentation/)
 
 ## Features
-- [ ] CI tools
+- [x] CI tools
 - [x] Handle [signature generation](https://developers.payfast.co.za/documentation/#api-signature-generation)
-- [ ] Generate Timestamp
+- [x] Generate Timestamp
 - [x] Make user defined requests
 - [ ] Support R0 verification charges
 - [x] Error handling
