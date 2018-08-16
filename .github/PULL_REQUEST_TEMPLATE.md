@@ -54,4 +54,4 @@ Remove everything above, including this line. The template is below.
 
 ...
 
-Notify the following people: @darrynten 
+Notify the following people: @fergusdixon
