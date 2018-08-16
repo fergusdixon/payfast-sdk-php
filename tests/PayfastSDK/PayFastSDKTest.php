@@ -22,8 +22,8 @@ class PayFastSDKTest extends TestCase
 
     /**
      * Checks if constructor works fine
-     * @param $config
-     * @param $expected
+     *
+     * @throws \FergusDixon\PayFastSDK\Exception\ConfigException
      */
     public function testConstructor()
     {
