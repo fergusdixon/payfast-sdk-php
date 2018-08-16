@@ -1,8 +1,9 @@
 # payfast-sdk-php
 ![MIT License](https://img.shields.io/github/license/fergusdixon/payfast-sdk-php.svg)
-![Travis Build Status](https://travis-ci.org/fergusdixon/payfast-sdk-php.svg?branch=master)
-![StyleCI Status](https://styleci.io/repos/??/shield?branch=master)
-[![codecov](https://codecov.io/gh/fergusdixon/payfast-sdk-php/branch/master/graph/badge.svg)](https://codecov.io/gh/fergusdixon/payfast-sdk-php)
+![Travis Build Status](https://travis-ci.com/fergusdixon/payfast-sdk-php.svg?branch=dev)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d6158e0262a84d67927b771d12dd9d77)](https://www.codacy.com/project/fergusdixon101/payfast-sdk-php/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=fergusdixon/payfast-sdk-php&amp;utm_campaign=Badge_Grade_Dashboard)
+[![StyleCI](https://github.styleci.io/repos/144857427/shield?branch=dev)](https://github.styleci.io/repos/144857427)
+[![codecov](https://codecov.io/gh/fergusdixon/payfast-sdk-php/branch/dev/graph/badge.svg?token=h18LyV3ueg)](https://codecov.io/gh/fergusdixon/payfast-sdk-php)
 ![Packagist Version](https://img.shields.io/packagist/v/fergusdixon/payfast-sdk-php.svg)
 
 A PHP handler for making requests to documented [PayFast](https://www.payfast.co.za) endpoints.
