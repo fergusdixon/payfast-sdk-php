@@ -5,7 +5,7 @@ addons:
     repo_token:
 
 php:
-  - 7.0
+  - 7.2
 
 before_script:
   - composer self-update
