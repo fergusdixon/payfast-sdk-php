@@ -124,7 +124,7 @@ class RequestHandler
         if (is_null($method)) {
             throw new ValidationException(
                 ValidationException::INVALID_METHOD_EXCEPTION,
-                sprintf('Method cannot be null.')
+                'Method cannot be null.'
             );
         }
 
