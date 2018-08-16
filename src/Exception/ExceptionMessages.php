@@ -18,6 +18,8 @@ class ExceptionMessages
     // Validation codes 111xx
     public static $validationMessages = [
         12100 => 'Unknown validation error',
+        12101 => 'Invalid verb',
+        12102 => 'Invalid method'
     ];
 
     // Maps to standard HTTP error codes

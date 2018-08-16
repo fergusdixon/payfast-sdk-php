@@ -117,14 +117,14 @@ class RequestHandler
         if ($verb !== 'GET' && $verb !== 'POST') {
             throw new ValidationException(
                 ValidationException::INVALID_VERB_EXCEPTION,
-                sprintf('Invalid verb: %s', $verb)
+                $verb
             );
         }
 
         if (is_null($method)) {
             throw new ValidationException(
                 ValidationException::INVALID_METHOD_EXCEPTION,
-                sprintf('Method cannot be null', $verb)
+                sprintf('Method cannot be null.')
             );
         }
 
