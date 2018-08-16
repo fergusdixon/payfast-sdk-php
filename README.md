@@ -11,11 +11,11 @@ See their [docs](https://developers.payfast.co.za/documentation/)
 
 ## Features
 - [ ] CI tools
-- [ ] Handle [signature generation](https://developers.payfast.co.za/documentation/#api-signature-generation)
+- [x] Handle [signature generation](https://developers.payfast.co.za/documentation/#api-signature-generation)
 - [ ] Generate Timestamp
-- [ ] Make user defined requests
+- [x] Make user defined requests
 - [ ] Support R0 verification charges
-- [ ] Error handling
+- [x] Error handling
 - [ ] Built in functions
   - [ ] Ping
   - [ ] Transaction History
