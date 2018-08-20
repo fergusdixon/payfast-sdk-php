@@ -47,7 +47,7 @@ $payfast = new PayFastSDK($config);
 ```
 
 ### Custom Requests
-You can create a request to any endpoint in PayFast using `$payfast->request->custom($verb, $method, $options)`
+You can create a request to any endpoint in PayFast using `$payfast->request->request($verb, $method, $options)`
 
 For example, getting [Transaction History](https://developers.payfast.co.za/documentation/#transaction-history)
 ```php
