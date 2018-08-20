@@ -68,7 +68,7 @@ Payfast requires a MD5 hash of the alphabetised submitted variables, header and 
 ### Testing
 Payfast provides a [sandbox environment](https://sandbox.payfast.co.za/) to test integrations.
 
-Test requests are send to the normal endpoint, but append `?testing=true` to the URI.
+Test requests are sent to the normal endpoint, but append `?testing=true` to the URI.
 
 ## Acknowledgements
 - Add yourself here!
