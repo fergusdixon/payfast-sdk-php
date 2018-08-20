@@ -175,20 +175,7 @@ class RequestHandler
         ];
 
         // Create the URI
-        $protocol = $this->ssl ? 'https' : 'http';
-
-        $uri = sprintf(
-            '%s:%s:%s%s',
-            $protocol,
-            $this->endpoint,
-            $this->port,
-            $method
-        );
-
-        // Are we using the sandbox?
-        if ($this->testing === true) {
-            $uri .= '?testing=true';
-        }
+        $uri = $this->makeUri($method);
 
         if ($verb === 'POST') {
             $data = json_encode($parameters);
@@ -306,5 +293,29 @@ class RequestHandler
             );
         }
         return join('&', $elements);
+    }
+
+    /**
+     * @param $method
+     * @return string
+     */
+    private function makeUri($method)
+    {
+        $protocol = $this->ssl ? 'https' : 'http';
+
+        $uri = sprintf(
+            '%s:%s:%s%s',
+            $protocol,
+            $this->endpoint,
+            $this->port,
+            $method
+        );
+
+        // Are we using the sandbox?
+        if ($this->testing === true) {
+            $uri .= '?testing=true';
+        }
+
+        return $uri;
     }
 }
