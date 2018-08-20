@@ -57,7 +57,7 @@ $options = [
     'from' => '2018-02-01',
     'to' => '2018-03-04',
 ];
-$response = $payfast->request->custom($verb, $method, $options)
+$response = $payfast->request->request($verb, $method, $options)
 ```
 
 ## Quirks

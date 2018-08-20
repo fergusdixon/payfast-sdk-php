@@ -103,6 +103,8 @@ class RequestHandler
     }
 
     /**
+     * Makes a user defined request to PayFast
+     *
      * @param String $verb
      * @param $method
      * @param array $parameters
@@ -111,7 +113,7 @@ class RequestHandler
      * @throws ValidationException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function custom(String $verb, $method, $parameters = [])
+    public function request(String $verb, $method, $parameters = [])
     {
         // Only GET and POST are supported by PayFast
         if ($verb !== 'GET' && $verb !== 'POST') {
