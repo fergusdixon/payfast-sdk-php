@@ -113,7 +113,7 @@ class RequestHandler
      * @throws ValidationException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function request(String $verb, $method, $parameters = [])
+    public function customRequest(String $verb, $method, $parameters = [])
     {
         // Only GET and POST are supported by PayFast
         if ($verb !== 'GET' && $verb !== 'POST') {
@@ -142,7 +142,7 @@ class RequestHandler
      * @return array|string
      * @throws ApiException
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @see RequestHandler::request()
+     * @see RequestHandler::customRequest()
      */
     private function handleRequest($verb, $method, array $parameters)
     {
@@ -178,6 +178,9 @@ class RequestHandler
         $uri = $this->makeUri($method);
 
         if ($verb === 'POST') {
+            if ($this->testing) {
+                $uri .= '?testing=true';
+            }
             $data = json_encode($parameters);
             $request['headers']['Content-Length'] = strlen($data);
             $request['body'] = $data;
@@ -185,18 +188,11 @@ class RequestHandler
 
         // We need to add params to URI
         if ($verb === 'GET') {
-            if (!$this->testing) {
-                $uri .= '?';
-            } elseif (sizeof($parameters) > 0) {
-                $uri .= '&';
+            if ($this->testing) {
+                $parameters['testing'] = 'true';
             }
 
-            foreach ($parameters as $key => $value) {
-                $uri .= sprintf('%s=%s&', $key, $value);
-            }
-
-            // Trim trailing ampersand
-            $uri = rtrim($uri, '&');
+            $uri .= '?' . http_build_query($parameters);
         }
 
         try {
@@ -310,11 +306,6 @@ class RequestHandler
             $this->port,
             $method
         );
-
-        // Are we using the sandbox?
-        if ($this->testing === true) {
-            $uri .= '?testing=true';
-        }
 
         return $uri;
     }
