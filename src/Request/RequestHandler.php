@@ -5,14 +5,18 @@
  * @category Library
  * @package  PayFastSDK
  * @author   Darryn Ten <darrynten@github.com>
+ * @author   Fergus Strangways-Dixon <fergusdixon@github.com>
  * @license  MIT <https://github.com/fergusdixon/payfast-sdk-php/blob/master/LICENSE>
  * @link     https://github.com/fergusdixon/payfast-sdk-php
  */
 
 namespace FergusDixon\PayFastSDK\Request;
 
+use DateTime;
+use DateTimeZone;
 use FergusDixon\PayFastSDK\Exception\ApiException;
 
+use FergusDixon\PayFastSDK\Exception\ValidationException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
@@ -61,13 +65,6 @@ class RequestHandler
     private $endpoint;
 
     /**
-     * Method to call
-     *
-     * @var string $method
-     */
-    private $method;
-
-    /**
      * Port to use
      *
      * @var integer $port
@@ -98,7 +95,6 @@ class RequestHandler
         $this->merchantId = $config['merchantId'];
         $this->passPhrase = $config['passPhrase'];
         $this->endpoint = $config['endpoint'];
-        $this->method= $config['method'];
         $this->port = $config['port'];
         $this->ssl = $config['ssl'];
         $this->testing = $config['testing'];
@@ -107,32 +103,100 @@ class RequestHandler
     }
 
     /**
+     * Makes a user defined request to PayFast
+     *
+     * @param String $verb
+     * @param $method
+     * @param array $parameters
+     * @return array|string
+     * @throws ApiException
+     * @throws ValidationException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function customRequest(String $verb, $method, $parameters = [])
+    {
+        // Only GET and POST are supported by PayFast
+        if ($verb !== 'GET' && $verb !== 'POST') {
+            throw new ValidationException(
+                ValidationException::INVALID_VERB_EXCEPTION,
+                $verb
+            );
+        }
+
+        if (is_null($method)) {
+            throw new ValidationException(
+                ValidationException::INVALID_METHOD_EXCEPTION,
+                'Method cannot be null.'
+            );
+        }
+
+        return $this->handleRequest($verb, $method, $parameters);
+    }
+
+    /**
      * Makes a request using Guzzle
      *
-     * @param array $options Request options
+     * @param $verb
+     * @param $method
+     * @param array $parameters
      * @return array|string
      * @throws ApiException
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @see RequestHandler::request()
+     * @see RequestHandler::customRequest()
      */
-    public function handleRequest(array $options)
+    private function handleRequest($verb, $method, array $parameters)
     {
-        $protocol = $this->ssl ? 'https' : 'http';
+        // Get the timestamp in the required format
+        $date = new DateTime();
+        $date->setTimeZone(new DateTimeZone('UTC'));
+        $date->setTimestamp(time());
+        $timestamp = $date->format('Y-m-d\TH:i:s');
 
-        $uri = sprintf(
-            '%s:%s:%s%s',
-            $protocol,
-            $this->endpoint,
-            $this->port,
-            $this->method
-        );
+        $signParameters = $this->getSigningObject($timestamp);
 
-        if ($this->testing === true) {
-            $uri .= '?testing=true';
+        // Add the provided params to $signParameters
+        foreach ($parameters as $key => $value) {
+            $signParameters[$key] = $value;
+        }
+
+        // MD5 hash the fields
+        $signature = $this->generateSignature($signParameters);
+
+        // Create the headers
+        $request = [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Content-Length' => 0,
+                'signature' => $signature,
+                'timestamp' => $timestamp,
+                'version' => self::VERSION,
+                'merchant-id' => $this->merchantId,
+            ],
+        ];
+
+        // Create the URI
+        $uri = $this->makeUri($method);
+
+        if ($verb === 'POST') {
+            if ($this->testing) {
+                $uri .= '?testing=true';
+            }
+            $data = json_encode($parameters);
+            $request['headers']['Content-Length'] = strlen($data);
+            $request['body'] = $data;
+        }
+
+        // We need to add params to URI
+        if ($verb === 'GET') {
+            if ($this->testing) {
+                $parameters['testing'] = 'true';
+            }
+
+            $uri .= '?' . http_build_query($parameters);
         }
 
         try {
-            $response = $this->client->request('POST', $uri, $options);
+            $response = $this->client->request($verb, $uri, $request);
             $body = (string)$response->getBody();
             return $body;
         } catch (RequestException $exception) {
@@ -225,5 +289,24 @@ class RequestHandler
             );
         }
         return join('&', $elements);
+    }
+
+    /**
+     * @param $method
+     * @return string
+     */
+    private function makeUri($method)
+    {
+        $protocol = $this->ssl ? 'https' : 'http';
+
+        $uri = sprintf(
+            '%s:%s:%s%s',
+            $protocol,
+            $this->endpoint,
+            $this->port,
+            $method
+        );
+
+        return $uri;
     }
 }

@@ -35,7 +35,7 @@ class ConfigTest extends TestCase
     public function setUp()
     {
         $this->configMock = $this
-            ->getMockBuilder(\FergusDixon\PayFastSDK\Config\Config::class)
+            ->getMockBuilder(Config::class)
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
     }

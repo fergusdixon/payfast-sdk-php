@@ -21,7 +21,8 @@ use Exception;
 class ValidationException extends Exception
 {
     const UNDEFINED_VALIDATION_EXCEPTION = 12100;
-    // number constants up from this number - 12101 is next
+    const INVALID_VERB_EXCEPTION = 12101;
+    const INVALID_METHOD_EXCEPTION = 12102;
 
     /**
      * Custom validation exception handler

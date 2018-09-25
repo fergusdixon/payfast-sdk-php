@@ -11,9 +11,9 @@ A PHP handler for making requests to documented [PayFast](https://www.payfast.co
 See their [docs](https://developers.payfast.co.za/documentation/)
 
 ## Features
-- [ ] CI tools
+- [x] CI tools
 - [x] Handle [signature generation](https://developers.payfast.co.za/documentation/#api-signature-generation)
-- [ ] Generate Timestamp
+- [x] Generate Timestamp
 - [x] Make user defined requests
 - [ ] Support R0 verification charges
 - [x] Error handling
@@ -28,6 +28,38 @@ See their [docs](https://developers.payfast.co.za/documentation/)
     - [ ] Unpause Subscription
     - [ ] Cancel Subscription
     
+## Usage
+This PayFast SDK requires config variables passed to it. 
+
+`merchantId` and `passPhrase` are mandatory, if not defined other fields will default to values shown below:
+
+```php
+$config = [
+    'merchantId' => 'testId',               // Required
+    'passPhrase' => 'testPhrase',           // Required
+    'endpoint' => '//api.payfast.co.za',
+    'port' => 443,
+    'ssl' => true,
+    'testing' => false,
+];
+
+$payfast = new PayFastSDK($config);
+```
+
+### Custom Requests
+You can create a request to any endpoint in PayFast using `$payfast->request->customRequest($verb, $method, $options)`
+
+For example, getting [Transaction History](https://developers.payfast.co.za/documentation/#transaction-history)
+```php
+$verb = 'GET';
+$method = '/history';
+$options = [
+    'from' => '2018-02-01',
+    'to' => '2018-03-04',
+];
+$response = $payfast->request->customRequest($verb, $method, $options)
+```
+
 ## Quirks
 
 ### Signature Generation
@@ -36,7 +68,7 @@ Payfast requires a MD5 hash of the alphabetised submitted variables, header and 
 ### Testing
 Payfast provides a [sandbox environment](https://sandbox.payfast.co.za/) to test integrations.
 
-Test requests are send to the normal endpoint, but append `?testing=true` to the URI.
+Test requests are sent to the normal endpoint, but append `?testing=true` to the URI.
 
 ## Acknowledgements
 - Add yourself here!

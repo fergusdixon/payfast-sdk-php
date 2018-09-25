@@ -23,8 +23,7 @@ class RequestHandlerTest extends TestCase
     private $config = [
         'merchantId' => 'testId',
         'passPhrase' => 'testPhrase',
-        'endpoint' => 'http://localhost:8082',
-        'method' => '/ping',
+        'endpoint' => '//localhost',
         'port' => 80,
         'ssl' => false,
         'testing' => true,
@@ -84,10 +83,13 @@ class RequestHandlerTest extends TestCase
      * @param $options
      * @param $result
      * @throws \FergusDixon\PayFastSDK\Exception\ApiException
+     * @throws \FergusDixon\PayFastSDK\Exception\ValidationException
      * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \ReflectionException
      */
-    public function testHandleRequest($options, $result)
+    public function testPostRequest($options, $result)
     {
+        // TODO make mocking more intensive for a better test
         $this->setUpMockClient([
             new Response(
                 200,
@@ -96,10 +98,39 @@ class RequestHandlerTest extends TestCase
             ),
         ]);
 
-        $request = $this->handler->handleRequest($options);
+        $response = $this->handler->customRequest('POST', '/adhoc', $options);
         $this->assertEquals(
             $result,
-            $request
+            $response
+        );
+    }
+
+    /**
+     * Tests if current handler reacts right on different HTTP method requests
+     *
+     * @dataProvider dataProvider
+     * @param $options
+     * @param $result
+     * @throws \FergusDixon\PayFastSDK\Exception\ApiException
+     * @throws \FergusDixon\PayFastSDK\Exception\ValidationException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \ReflectionException
+     */
+    public function testGetRequest($options, $result)
+    {
+        // TODO make mocking more intensive for a better test
+        $this->setUpMockClient([
+            new Response(
+                200,
+                [ 'ContentType: application/json' ],
+                $result
+            ),
+        ]);
+
+        $response = $this->handler->customRequest('GET', '/history', $options);
+        $this->assertEquals(
+            $result,
+            $response
         );
     }
 
@@ -117,20 +148,11 @@ class RequestHandlerTest extends TestCase
             'status' => 'OK',
         ]);
 
-        $data = 'name=value&another=word';
-
         return [
             [
                 [
-                    'headers' => [
-                        'Content-Type' => 'application/x-www-form-urlencoded',
-                        'Content-Length' => sizeof((array)$data),
-                        'signature' => 'xxx',
-                        'timestamp' => '1',
-                        'version' => 'v1',
-                        'merchant-id' => 'xxx',
-                    ],
-                    'body' => $data
+                    'dummyDate' => '2018-02-02',
+                    'dummyString' => 'Qwerty',
                 ],
                 $testResponse,
             ],
@@ -141,6 +163,7 @@ class RequestHandlerTest extends TestCase
      * Utility method for GuzzleHttp\MockHandler setup
      *
      * @param $results
+     * @throws \ReflectionException
      */
     private function setUpMockClient($results)
     {
