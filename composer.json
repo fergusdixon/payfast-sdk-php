@@ -1,8 +1,16 @@
 {
   "name": "fergusdixon/payfast-sdk-php",
-  "description": "PayFast SDK PHP",
+  "description": "PayFast SDK - Make requests to PayFast",
   "type": "library",
-  "version": "1.0.0",
+  "license": "MIT",
+  "keywords": ["payfast", "payments"],
+  "authors": [
+    {
+      "name": "Fergus Strangways-Dixon",
+      "email": "fergusdixon@github.com",
+      "role": "Developer"
+    }
+  ],
   "require": {
     "php": "^7.2",
     "guzzlehttp/guzzle": "^6.2.1"
